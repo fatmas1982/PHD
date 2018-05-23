@@ -4,11 +4,9 @@
 ###SBATCH --gres=gpu:1
 ###SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-###SBATCH --exclusive
 #SBATCH --output=prmu_%A_.stdout
 #SBATCH --out=prmu_%A.txt
-#SBATCH --array=0-139
+#SBATCH --array=0-117
 #SBATCH --error=prmu_%A.stderr
 #SBATCH --export=ALL
 #SBATCH --exclude=comp0[01-19]
@@ -61,11 +59,11 @@ export key=${SLURM_ARRAY_TASK_ID} #$key
 
 export all_gpus=1
 export processor='cpu'
-export dataset='cs'
+export dataset='split'
 
 
 
-step=0
+step=4000
 counter=`expr $key + $step`
  
 echo 'Counter'$counter
@@ -76,7 +74,7 @@ export cuda=2 #$key
 #printf "%4d: %s\n" $key ${B[$key]}
   #echo 'main_key '$key ' main_file ' ${arr[$key]}  >B_$key.out
 #srun ~/Cluster_Graph_Process_Permutation.sh
-singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu/cs/CJ-1/Cluster_Graph_Process_Permutation.py ${key} ${all_gpus} ${file} ${cuda} $processor $dataset
+singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu/split/CJ-1/Cluster_Graph_Process_Permutation.py ${key} ${all_gpus} ${file} ${cuda} $processor $dataset
 
 #done
 
