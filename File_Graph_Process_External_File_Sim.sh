@@ -4,9 +4,9 @@
 ###SBATCH --gres=gpu:1
 ###SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --array=1-3
 #SBATCH --cpus-per-task=1
-###SBATCH --exclusive
+#SBATCH --exclusive
+#SBATCH --array=0-2
 #SBATCH --exclude=comp0[01-19]
 
 #SBATCH --output=sim_stdout_%A.stdout
@@ -30,12 +30,12 @@ export CUDA_VISIBLE_DEVICES=${SLURM_ARRAY_TASK_ID}
 
 all_gpus=1
 processor='cpu'
-dataset='cs'
+dataset='split'
 
 
 cuda=${SLURM_ARRAY_TASK_ID}
 
-singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu/cs/FJ-3/File_Graph_Process_External_File_Sim.py ${SLURM_ARRAY_TASK_ID} $all_gpus $cuda $processor $dataset
+singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu/split/FJ-3/File_Graph_Process_External_File_Sim.py ${SLURM_ARRAY_TASK_ID} $all_gpus $cuda $processor $dataset
 
 
 

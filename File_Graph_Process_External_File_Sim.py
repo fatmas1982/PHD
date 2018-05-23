@@ -886,20 +886,7 @@ def name_file_no(full_name_path): #like cs
     d=full_name_path.split("/")
     ##print(d)
     name=d[len(d)-1].split(".")
-    #print(name[0][0])
-    import re
-    r = re.compile("([a-zA-Z]+)([0-9]+)")
-    m = r.match(name[0])
-    s=m.group(2)
-    #print(s,"ddd")
-    #if name[0][0]=="c":
-    #    return name[0][2:]
-    #else:
-    #   return name[0][5:]
-        
-    #return name[0][5:]
-    return s
-    
+    return name[0][5:]
     
 
 
@@ -911,7 +898,6 @@ def name_file_no(full_name_path): #like cs
 # In[56]:
 
 def read_last_file_list_sim_previouse(file_path,extention,no_task):
-    print(no_task,"sssssssssss")
     import os
     file_names = [os.path.join(file_path, f) 
                       for f in os.listdir(file_path) 
@@ -1290,11 +1276,11 @@ def sim_terms_previous_file(path_data_base,path_non_redundant,file_name):
     
     #previous_file_names_list=read_last_file_list(path_data_base+path_non_redundant,".csv")
     previous_file_names_list=read_last_file_list_sim_previouse(path_data_base+path_non_redundant,".csv",task_no)
-    print("previous_file_names_list",previous_file_names_list)
+    #print("previous_file_names_list",previous_file_names_list)
     #list_terms=read_cvs_by_pands(path_data_source,sub_path_data_source_tfidf+file_name,0,0)#.index
     list_terms=list(read_cvs_by_pands(path_data_base,path_non_redundant+file_name,None,0))
     for previous_file_name in previous_file_names_list:
-        print(previous_file_name)
+        #print(previous_file_name)
         pure_file_name=full_name_file(previous_file_name)
         if pure_file_name !=file_name:
             #print(pure_file_name)
