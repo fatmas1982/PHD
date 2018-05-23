@@ -1,8 +1,8 @@
 #! /bin/bash
 #BATCH --job-name=first-cuda-job
-#SBATCH --partition=cpu
+###SBATCH --partition=gpu
 ###SBATCH --gres=gpu:1
-###SBATCH --nodes=1
+#SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --array=0-2
@@ -35,10 +35,10 @@ export CUDA_VISIBLE_DEVICES=${SLURM_ARRAY_TASK_ID}
 all_gpus=1
 
 cuda=${SLURM_ARRAY_TASK_ID}
-processor='cpu'
-dataset='split'
 
-singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu/split/FJ-2/File_Graph_Process_Internal_File_Sim.py ${SLURM_ARRAY_TASK_ID} $all_gpus $cuda $processor $dataset
+
+
+singularity exec ~/data/containers/TensorFlow/tf-gpu.img ~/cpu_File_Graph_Process_Internal_File_Sim.py ${SLURM_ARRAY_TASK_ID} $all_gpus $cuda
 
 
 
